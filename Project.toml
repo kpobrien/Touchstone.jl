@@ -1,0 +1,22 @@
+name = "Touchstone"
+uuid = "af4736ee-1570-4274-b14c-898d17d80b75"
+authors = ["Kevin P. O'Brien <kpobrien@mit.edu>"]
+version = "0.1.0"
+
+[deps]
+
+[compat]
+Aqua = "0.7,0.8"
+Documenter = "0.27,1"
+Test = "1"
+UUIDs = "1.11.0"
+julia = "1.9"
+
+[extras]
+Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[targets]
+test = ["Aqua", "Documenter", "Test", "UUIDs"]
