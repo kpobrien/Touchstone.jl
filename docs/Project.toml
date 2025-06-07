@@ -5,4 +5,4 @@ Touchstone = "af4736ee-1570-4274-b14c-898d17d80b75"
 
 [compat]
 Documenter = "0.27,1"
-Test = "1.9"
+Test = "1"
