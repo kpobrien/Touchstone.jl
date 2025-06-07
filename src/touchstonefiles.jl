@@ -351,7 +351,7 @@ References to the [1.1 spec](https://ibis.org/connector/touchstone_spec11.pdf)
 and the [2.0 spec](https://ibis.org/touchstone_ver2.0/touchstone_ver2_0.pdf).
 """
 function touchstone_save(filename::String, frequencies::AbstractVector,
-    N::AbstractArray; version=1.0, reference::Vector=[50.0,50.0], R = 50.0,
+    N::AbstractArray; version=1.0, reference::Vector=Float64[], R = 50.0,
     format::String="RI", parameter::String = "S", comments::Vector{String}=[""],
     twoportdataorder::String="12_21", matrixformat::String="Full",
     frequencyunit="Hz",
@@ -756,8 +756,10 @@ if length(reference) != numberofports
     error("Number of per port impedances must equal number of ports")
 end
 
-if version < 2.0 && allunique(reference)
-    error("The port impedances are not equal, so we cannot generate a Touchstone file with version < 2.0.")
+if version < 2.0
+    if numberofports > 1 && allunique(reference)
+        error("The port impedances are not equal, so we cannot generate a Touchstone file with version < 2.0.")
+    end
 end
 
 # # check the matrixformat
