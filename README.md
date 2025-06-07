@@ -1,8 +1,7 @@
 # Touchstone.jl
 
 [![Code coverage](https://codecov.io/gh/kpobrien/Touchstone.jl/branch/main/graphs/badge.svg)](https://codecov.io/gh/kpobrien/Touchstone.jl)
-[![Build Status](https://github.com/kpobrien/Touchstone.jl/actions/workflows/CI.yml/badge.svg
-)](https://github.com/kpobrien/Touchstone.jl/actions?query=workflow) 
+[![Build Status](https://github.com/kpobrien/Touchstone.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/kpobrien/Touchstone.jl/actions?query=workflow) [![Dev docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://kpobrien.github.io/Touchstone.jl/dev/reference/)
 
 Save and load network parameters in the Touchstone® file format. Touchstone® is a registered trademark of Agilent Technologies, Inc.
 
