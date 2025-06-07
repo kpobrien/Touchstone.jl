@@ -1,7 +1,7 @@
 module Touchstone
 
 # This is for reading and writing files in the touchstone format. 
-include("touchstone.jl")
+include("touchstonefiles.jl")
 
 export touchstone_save, touchstone_load
 
