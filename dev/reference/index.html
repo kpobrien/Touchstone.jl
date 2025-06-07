@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Reference · Touchstone</title><meta name="title" content="Reference · Touchstone"/><meta property="og:title" content="Reference · Touchstone"/><meta property="twitter:title" content="Reference · Touchstone"/><meta name="description" content="Documentation for Touchstone."/><meta property="og:description" content="Documentation for Touchstone."/><meta property="twitter:description" content="Documentation for Touchstone."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">Touchstone</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">-</a></li><li class="is-active"><a class="tocitem" href>Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Reference</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Reference</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/kpobrien/Touchstone.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Reference"><a class="docs-heading-anchor" href="#Reference">Reference</a><a id="Reference-1"></a><a class="docs-heading-anchor-permalink" href="#Reference" title="Permalink"></a></h1><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.TouchstoneFile" href="#Touchstone.TouchstoneFile"><code>Touchstone.TouchstoneFile</code></a> — <span class="docstring-category">Type</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">TouchstoneFile(f::Vector{Float64},
+    N::Array{Complex{Float64}},
+    frequencyunit::String,
+    parameter::String,
+    format::String,
+    R::Float64,
+    version::Float64,
+    numberofports::Int,
+    twoportdataorder::String,
+    numberoffrequencies::Int,
+    numberofnoisefrequencies::Int,
+    reference::Vector{Float64},
+    information::Vector{String},
+    matrixformat::String,
+    mixedmodeorder::Vector{Tuple{Char, Vector{Int}}},
+    comments::Vector{String},
+    networkdata::Vector{Float64},
+    noisedata::Vector{Float64})</code></pre><p>A structure to hold the data contained in a Touchstone file. In most cases, the user will not generate the struct directly. Instead, they will load a Touchstone file with <a href="#Touchstone.touchstone_load-Tuple{Any}"><code>touchstone_load</code></a>, parse an IOStream or IOBuffer with <a href="#Touchstone.touchstone_parse-Tuple{IO}"><code>touchstone_parse</code></a>, or generate a TouchstoneFile struct with <a href="#Touchstone.touchstone_file-Tuple{AbstractVector{Float64}, Array{ComplexF64, 3}}"><code>touchstone_file</code></a>.</p></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.arraytonetworkdata-NTuple{11, Any}" href="#Touchstone.arraytonetworkdata-NTuple{11, Any}"><code>Touchstone.arraytonetworkdata</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">arraytonetworkdata(frequencies,N, numberofports, numberoffrequencies,
+    matrixformat, twoportdataorder, parameter, frequencyunit, format, R,
+    version)</code></pre><p>Return a vector with a frequency followed by the network data parameters for that frequency.</p><p><strong>Examples</strong></p><pre><code class="language-julia hljs">frequencies = 4.0e9:5.0e8:6.0e9
+N = [0.9546262517670427 - 0.296397700700921im;;; 0.8915960960938982 - 0.44358732281729774im;;; 0.9857309246425359 + 0.046691189499470154im;;; 0.9759591344506418 - 0.21128542054786678im;;; 0.9604441706426364 - 0.2762239892126382im]
+numberofports = 1
+numberoffrequencies = 5
+matrixformat = &quot;Full&quot;
+twoportdataorder = &quot;12_21&quot;
+parameter = &quot;S&quot;
+frequencyunit = &quot;GHz&quot;
+format = &quot;MA&quot;
+R = 50.0
+version = 2.0
+Touchstone.arraytonetworkdata(frequencies,N, numberofports, numberoffrequencies, 
+    matrixformat, twoportdataorder, parameter, frequencyunit, format, R, version)
+
+# output
+15-element Vector{Float64}:
+   4.0
+   0.9995813511383583
+ -17.248815971093425
+   4.5
+   0.9958480363660398
+ -26.451285931791276
+   5.0
+   0.9868361175866559
+   2.711906450972103
+   5.5
+   0.9985678550072272
+ -12.21545548845392
+   6.0
+   0.9993761539770525
+ -16.045248853866596</code></pre><pre><code class="language-julia hljs">frequencies = 4.0e9:5.0e8:6.0e9
+N = [0.9546262517670427 - 0.296397700700921im;;; 0.8915960960938982 - 0.44358732281729774im;;; 0.9857309246425359 + 0.046691189499470154im;;; 0.9759591344506418 - 0.21128542054786678im;;; 0.9604441706426364 - 0.2762239892126382im]
+numberofports = 1
+numberoffrequencies = 5
+matrixformat = &quot;Lower&quot;
+twoportdataorder = &quot;12_21&quot;
+parameter = &quot;Z&quot;
+frequencyunit = &quot;GHz&quot;
+format = &quot;MA&quot;
+R = 50.0
+version = 2.0
+Touchstone.arraytonetworkdata(frequencies,N, numberofports,
+    numberoffrequencies, matrixformat, twoportdataorder, parameter,
+    frequencyunit, format, R, version)
+
+# output
+15-element Vector{Float64}:
+   4.0
+   0.9995813511383583
+ -17.248815971093425
+   4.5
+   0.9958480363660398
+ -26.451285931791276
+   5.0
+   0.9868361175866559
+   2.711906450972103
+   5.5
+   0.9985678550072272
+ -12.21545548845392
+   6.0
+   0.9993761539770525
+ -16.045248853866596</code></pre><pre><code class="language-julia hljs">frequencies = 4.0e9:5.0e8:6.0e9
+N = [0.9546262517670427 - 0.296397700700921im;;; 0.8915960960938982 - 0.44358732281729774im;;; 0.9857309246425359 + 0.046691189499470154im;;; 0.9759591344506418 - 0.21128542054786678im;;; 0.9604441706426364 - 0.2762239892126382im]
+numberofports = 1
+numberoffrequencies = 5
+matrixformat = &quot;Lower&quot;
+twoportdataorder = &quot;12_21&quot;
+parameter = &quot;Z&quot;
+frequencyunit = &quot;GHz&quot;
+format = &quot;MA&quot;
+R = 50.0
+version = 1.0
+Touchstone.arraytonetworkdata(frequencies,N, numberofports,
+    numberoffrequencies, matrixformat, twoportdataorder, parameter,
+    frequencyunit, format, R, version)
+
+# output
+15-element Vector{Float64}:
+   4.0
+   0.019991627022767165
+ -17.248815971093425
+   4.5
+   0.019916960727320795
+ -26.451285931791276
+   5.0
+   0.01973672235173312
+   2.7119064509721027
+   5.5
+   0.019971357100144544
+ -12.215455488453918
+   6.0
+   0.019987523079541047
+ -16.0452488538666</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.frequencyscale-Tuple{String}" href="#Touchstone.frequencyscale-Tuple{String}"><code>Touchstone.frequencyscale</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">frequencyscale(frequencyunit::String)</code></pre><p>Convert the SI prefix in the string <code>frequencyunit</code> to the corresponding numerical value.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.frequencyscale(&quot;MHz&quot;)
+1.0e6</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isbegininformation-Tuple{String}" href="#Touchstone.isbegininformation-Tuple{String}"><code>Touchstone.isbegininformation</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isbegininformation(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [begin information] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isbegininformation(&quot;[begin information]&quot;)
+true
+
+julia&gt; Touchstone.isbegininformation(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isend-Tuple{String}" href="#Touchstone.isend-Tuple{String}"><code>Touchstone.isend</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isend(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [end] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isend(&quot;[end]&quot;)
+true
+
+julia&gt; Touchstone.isend(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isendinformation-Tuple{String}" href="#Touchstone.isendinformation-Tuple{String}"><code>Touchstone.isendinformation</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isendinformation(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [end information] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isendinformation(&quot;[end information]&quot;)
+true
+
+julia&gt; Touchstone.isendinformation(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.ismatrixformat-Tuple{String}" href="#Touchstone.ismatrixformat-Tuple{String}"><code>Touchstone.ismatrixformat</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">ismatrixformat(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [matrix format] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.ismatrixformat(&quot;[matrix format] full&quot;)
+true
+
+julia&gt; Touchstone.ismatrixformat(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.ismixedmodeorder-Tuple{String}" href="#Touchstone.ismixedmodeorder-Tuple{String}"><code>Touchstone.ismixedmodeorder</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">ismixedmodeorder(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [mixed-mode order] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.ismixedmodeorder(&quot;[mixed-mode order] full&quot;)
+true
+
+julia&gt; Touchstone.ismixedmodeorder(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isnetworkdata-Tuple{String}" href="#Touchstone.isnetworkdata-Tuple{String}"><code>Touchstone.isnetworkdata</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isnetworkdata(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [network data] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isnetworkdata(&quot;[network data]&quot;)
+true
+
+julia&gt; Touchstone.isnetworkdata(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isnoisedata-Tuple{String}" href="#Touchstone.isnoisedata-Tuple{String}"><code>Touchstone.isnoisedata</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isnoisedata(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [noise data] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isnoisedata(&quot;[noise data]&quot;)
+true
+
+julia&gt; Touchstone.isnoisedata(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isnumberoffrequencies-Tuple{String}" href="#Touchstone.isnumberoffrequencies-Tuple{String}"><code>Touchstone.isnumberoffrequencies</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isnumberoffrequencies(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [number of frequencies] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isnumberoffrequencies(&quot;[number of frequencies]&quot;)
+true
+
+julia&gt; Touchstone.isnumberoffrequencies(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isnumberofnoisefrequencies-Tuple{String}" href="#Touchstone.isnumberofnoisefrequencies-Tuple{String}"><code>Touchstone.isnumberofnoisefrequencies</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isnumberofnoisefrequencies(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [number of noise frequencies] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isnumberofnoisefrequencies(&quot;[number of noise frequencies]&quot;)
+true
+
+julia&gt; Touchstone.isnumberofnoisefrequencies(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isnumberofports-Tuple{String}" href="#Touchstone.isnumberofports-Tuple{String}"><code>Touchstone.isnumberofports</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isnumberofports(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [number of ports] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isnumberofports(&quot;[number of ports] 1&quot;)
+true
+
+julia&gt; Touchstone.isnumberofports(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isoptionline-Tuple{String}" href="#Touchstone.isoptionline-Tuple{String}"><code>Touchstone.isoptionline</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isoptionline(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the option line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isoptionline(&quot;# MHz Z MA R 75&quot;)
+true
+
+julia&gt; Touchstone.isoptionline(&quot;[number of ports] 1&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isreference-Tuple{String}" href="#Touchstone.isreference-Tuple{String}"><code>Touchstone.isreference</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isreference(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [reference] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isreference(&quot;[reference]&quot;)
+true
+
+julia&gt; Touchstone.isreference(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.istwoportdataorder-Tuple{String}" href="#Touchstone.istwoportdataorder-Tuple{String}"><code>Touchstone.istwoportdataorder</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">istwoportdataorder(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [two-port data order] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.istwoportdataorder(&quot;[two-port data order] 12_21&quot;)
+true
+
+julia&gt; Touchstone.istwoportdataorder(&quot;[version] 1.0&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.isversion-Tuple{String}" href="#Touchstone.isversion-Tuple{String}"><code>Touchstone.isversion</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">isversion(line::String)</code></pre><p>Return <code>true</code> if the string <code>line</code> is the [version] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.isversion(&quot;[version] 1.0&quot;)
+true
+
+julia&gt; Touchstone.isversion(&quot;[number of ports] 1&quot;)
+false</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.matrixindices-Tuple{Any, Any, Any}" href="#Touchstone.matrixindices-Tuple{Any, Any, Any}"><code>Touchstone.matrixindices</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">matrixindices(nports, format, twoportdataorder)</code></pre><p>Return the cartesian indices of the elements of a scattering matrix given the number of ports <code>nports</code> and the format <code>format</code> which can be &quot;Full&quot;, &quot;Upper&quot;, or &quot;Lower&quot;. The two port data order <code>twoportdataorder</code> can be &quot;<code>12_21</code>&quot; or &quot;<code>21_12</code>&quot; for 2 ports but must be &quot;<code>12_21</code>&quot; for other numbers of ports.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.matrixindices(2,&quot;Full&quot;,&quot;12_21&quot;)
+4-element Vector{CartesianIndex{2}}:
+ CartesianIndex(1, 1)
+ CartesianIndex(1, 2)
+ CartesianIndex(2, 1)
+ CartesianIndex(2, 2)
+
+julia&gt; Touchstone.matrixindices(2,&quot;Full&quot;,&quot;21_12&quot;)
+4-element Vector{CartesianIndex{2}}:
+ CartesianIndex(1, 1)
+ CartesianIndex(2, 1)
+ CartesianIndex(1, 2)
+ CartesianIndex(2, 2)</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.matrixindices-Tuple{Any, Any}" href="#Touchstone.matrixindices-Tuple{Any, Any}"><code>Touchstone.matrixindices</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">matrixindices(nports, format)</code></pre><p>Return the cartesian indices of the elements of a scattering matrix given the number of ports <code>nports</code> and the format <code>format</code> which can be &quot;Full&quot;, &quot;Upper&quot;, or &quot;Lower&quot;.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.matrixindices(2,&quot;Full&quot;,printflag=true)
+11 12 
+21 22 
+4-element Vector{CartesianIndex{2}}:
+ CartesianIndex(1, 1)
+ CartesianIndex(1, 2)
+ CartesianIndex(2, 1)
+ CartesianIndex(2, 2)
+
+julia&gt; Touchstone.matrixindices(2,&quot;Upper&quot;,printflag=true)
+11 12 
+   22 
+      3-element Vector{CartesianIndex{2}}:
+ CartesianIndex(1, 1)
+ CartesianIndex(1, 2)
+ CartesianIndex(2, 2)
+
+julia&gt; Touchstone.matrixindices(2,&quot;Lower&quot;,printflag=true)
+11 
+21 22 
+3-element Vector{CartesianIndex{2}}:
+ CartesianIndex(1, 1)
+ CartesianIndex(2, 1)
+ CartesianIndex(2, 2)</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.networkdatatoarray-NTuple{10, Any}" href="#Touchstone.networkdatatoarray-NTuple{10, Any}"><code>Touchstone.networkdatatoarray</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">networkdatatoarray(networkdata, numberofports, numberoffrequencies,
+    matrixformat, twoportdataorder, parameter, frequencyunit, format, R,
+    version)</code></pre><p><strong>Examples</strong></p><pre><code class="language-julia hljs">networkdata = [4.0, 0.9995813511383583, -17.248815971093425, 4.5, 0.9958480363660398, -26.451285931791276, 5.0, 0.9868361175866559, 2.711906450972103, 5.5, 0.9985678550072272, -12.21545548845392, 6.0, 0.9993761539770525, -16.045248853866596]
+numberofports = 1
+numberoffrequencies = 5
+matrixformat = &quot;Full&quot;
+twoportdataorder = &quot;12_21&quot;
+parameter = &quot;s&quot;
+frequencyunit = &quot;ghz&quot;
+format = &quot;ma&quot;
+R = 50.0
+version = 2.0
+frequencies, N = Touchstone.networkdatatoarray(networkdata,
+    numberofports, numberoffrequencies, matrixformat, twoportdataorder,
+    parameter, frequencyunit, format, R, version)
+println(frequencies)
+println(N[1,1,:])
+
+# output
+[4.0e9, 4.5e9, 5.0e9, 5.5e9, 6.0e9]
+ComplexF64[0.9546262517670427 - 0.296397700700921im, 0.8915960960938982 - 0.44358732281729774im, 0.9857309246425359 + 0.04669118949947016im, 0.9759591344506418 - 0.21128542054786678im, 0.9604441706426364 - 0.2762239892126382im]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parseinformation!-Tuple{Vector{String}, Vector{String}, IO}" href="#Touchstone.parseinformation!-Tuple{Vector{String}, Vector{String}, IO}"><code>Touchstone.parseinformation!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parseinformation!(information::Vector{String},io::IO)</code></pre><p>Append the contents of the information section of a Touchstone file from the IOBuffer or IOStream <code>io</code> to the vector <code>information</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia hljs">information = String[]
+comments = String[]
+io = IOBuffer(&quot;This is an information section.
+[End Information]&quot;)
+Touchstone.parseinformation!(information,comments,io)
+println(information)
+
+# output
+[&quot;this is an information section.&quot;]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsematrixformat-Tuple{String}" href="#Touchstone.parsematrixformat-Tuple{String}"><code>Touchstone.parsematrixformat</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsematrixformat(line::String)</code></pre><p>Return the two-port data order string parsed from the [two-port data order] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parsematrixformat(&quot;[matrix format] lower&quot;)
+&quot;Lower&quot;
+
+julia&gt; Touchstone.parsematrixformat(&quot;[matrix format] upper&quot;)
+&quot;Upper&quot;</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsemixedmodeorder!-Tuple{Vector{Tuple{Char, Vector{Int64}}}, String}" href="#Touchstone.parsemixedmodeorder!-Tuple{Vector{Tuple{Char, Vector{Int64}}}, String}"><code>Touchstone.parsemixedmodeorder!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsemixedmodeorder!(mixedmodeorder::Vector{Tuple{Char, Vector{Int}}},
+    line::String)</code></pre><p>Append the contents of the [mixed-mode order] line of a Touchstone file from the to the vector <code>mixedmodeorder</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; mixedmodeorder = Tuple{Char, Vector{Int}}[];Touchstone.parsemixedmodeorder!(mixedmodeorder,&quot;[Mixed-Mode Order] D2,3 D6,5 C2,3 C6,5 S4 S1&quot;);mixedmodeorder
+6-element Vector{Tuple{Char, Vector{Int64}}}:
+ (&#39;D&#39;, [2, 3])
+ (&#39;D&#39;, [6, 5])
+ (&#39;C&#39;, [2, 3])
+ (&#39;C&#39;, [6, 5])
+ (&#39;S&#39;, [4])
+ (&#39;S&#39;, [1])</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsenetworkdata!-Tuple{Vector{Float64}, Vector{String}, IO}" href="#Touchstone.parsenetworkdata!-Tuple{Vector{Float64}, Vector{String}, IO}"><code>Touchstone.parsenetworkdata!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsenetworkdata!(networkdata::Vector{Float64}, comments::Vector{String}, io::IO)</code></pre><p>Append the contents of the networkdata section of a Touchstone file from the IOBuffer or IOStream <code>io</code> to the vector <code>networkdata</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia hljs">networkdata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;1.0000 0.3926 -0.1211 -0.0003 -0.0021 -0.0003 -0.0021 0.3926 -0.1211
+2.0000 0.3517 -0.3054 -0.0096 -0.0298 -0.0096 -0.0298 0.3517 -0.3054
+10.000 0.3419 0.3336 -0.0134 0.0379 -0.0134 0.0379 0.3419 0.3336&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+println(networkdata)
+
+# output
+[1.0, 0.3926, -0.1211, -0.0003, -0.0021, -0.0003, -0.0021, 0.3926, -0.1211, 2.0, 0.3517, -0.3054, -0.0096, -0.0298, -0.0096, -0.0298, 0.3517, -0.3054, 10.0, 0.3419, 0.3336, -0.0134, 0.0379, -0.0134, 0.0379, 0.3419, 0.3336]</code></pre><pre><code class="language-julia hljs">networkdata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;2 .95 -26 3.57 157 .04 76 .66 -14
+22 .60 -144 1.30 40 .14 40 .56 -85
+! NOISE PARAMETERS
+4 .7 .64 69 .38
+18 2.7 .46 -33 .40&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+println(networkdata)
+
+# output
+[2.0, 0.95, -26.0, 3.57, 157.0, 0.04, 76.0, 0.66, -14.0, 22.0, 0.6, -144.0, 1.3, 40.0, 0.14, 40.0, 0.56, -85.0]</code></pre><pre><code class="language-julia hljs">networkdata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;2 .95 -26 3.57 157 .04 76 .66 -14
+22 .60 -144 1.30 40 .14 40 .56 -85
+[Noise Data]
+4 .7 .64 69 19
+18 2.7 .46 -33 20
+[End]&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+println(networkdata)
+
+# output
+[2.0, 0.95, -26.0, 3.57, 157.0, 0.04, 76.0, 0.66, -14.0, 22.0, 0.6, -144.0, 1.3, 40.0, 0.14, 40.0, 0.56, -85.0]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsenoisedata!-Tuple{Any, Any, Any}" href="#Touchstone.parsenoisedata!-Tuple{Any, Any, Any}"><code>Touchstone.parsenoisedata!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsenoisedata!(noisedata::Vector{Float64}, comments::Vector{String},
+    io::IO)</code></pre><p>Append the contents of the networkdata section of a Touchstone file from the IOBuffer or IOStream <code>io</code> to the vector <code>networkdata</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia hljs">networkdata = Float64[]
+noisedata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;1.0000 0.3926 -0.1211 -0.0003 -0.0021 -0.0003 -0.0021 0.3926 -0.1211
+2.0000 0.3517 -0.3054 -0.0096 -0.0298 -0.0096 -0.0298 0.3517 -0.3054
+10.000 0.3419 0.3336 -0.0134 0.0379 -0.0134 0.0379 0.3419 0.3336&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+Touchstone.parsenoisedata!(noisedata,comments,io)
+println(noisedata)
+
+# output
+Float64[]</code></pre><pre><code class="language-julia hljs">networkdata = Float64[]
+noisedata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;2 .95 -26 3.57 157 .04 76 .66 -14
+22 .60 -144 1.30 40 .14 40 .56 -85
+! NOISE PARAMETERS
+4 .7 .64 69 .38
+18 2.7 .46 -33 .40&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+Touchstone.parsenoisedata!(noisedata,comments,io)
+println(noisedata)
+
+# output
+[4.0, 0.7, 0.64, 69.0, 0.38, 18.0, 2.7, 0.46, -33.0, 0.4]</code></pre><pre><code class="language-julia hljs">networkdata = Float64[]
+noisedata = Float64[]
+comments = String[]
+io = IOBuffer(&quot;2 .95 -26 3.57 157 .04 76 .66 -14
+22 .60 -144 1.30 40 .14 40 .56 -85
+[Noise Data]
+4 .7 .64 69 19
+18 2.7 .46 -33 20
+[End]&quot;)
+Touchstone.parsenetworkdata!(networkdata,comments,io)
+Touchstone.parsenoisedata!(noisedata,comments,io)
+println(noisedata)
+
+# output
+[4.0, 0.7, 0.64, 69.0, 19.0, 18.0, 2.7, 0.46, -33.0, 20.0]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsenumberoffrequencies-Tuple{String}" href="#Touchstone.parsenumberoffrequencies-Tuple{String}"><code>Touchstone.parsenumberoffrequencies</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsenumberoffrequencies(line::String)</code></pre><p>Return the number of frequencies parsed from the [number of frequencies] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parsenumberoffrequencies(&quot;[number of frequencies] 10&quot;)
+10</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsenumberofnoisefrequencies-Tuple{String}" href="#Touchstone.parsenumberofnoisefrequencies-Tuple{String}"><code>Touchstone.parsenumberofnoisefrequencies</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsenumberofnoisefrequencies(line::String)</code></pre><p>Return the number of noise frequencies parsed from the [number of noise frequencies] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parsenumberofnoisefrequencies(&quot;[number of noise frequencies] 10&quot;)
+10</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsenumberofports-Tuple{String}" href="#Touchstone.parsenumberofports-Tuple{String}"><code>Touchstone.parsenumberofports</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsenumberofports(line::String)</code></pre><p>Return the number of ports parsed from the [number of ports] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parsenumberofports(&quot;[number of ports] 1&quot;)
+1</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parseoptionline-Tuple{String}" href="#Touchstone.parseoptionline-Tuple{String}"><code>Touchstone.parseoptionline</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parseoptionline(line::String)</code></pre><p>Return a struct TouchstoneOptionLine which contains the option line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parseoptionline(&quot;# MHz Z MA R 75&quot;)
+Touchstone.TouchstoneOptionLine(&quot;MHz&quot;, &quot;Z&quot;, &quot;MA&quot;, 75.0)
+
+julia&gt; Touchstone.parseoptionline(&quot;# MHz H RI R 75&quot;)
+Touchstone.TouchstoneOptionLine(&quot;MHz&quot;, &quot;H&quot;, &quot;RI&quot;, 75.0)</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsereference!-Tuple{Vector{Float64}, Vector{String}, String, Int64, IO}" href="#Touchstone.parsereference!-Tuple{Vector{Float64}, Vector{String}, String, Int64, IO}"><code>Touchstone.parsereference!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsereference!(reference::Vector{Float64}, comments::Vector{String},
+    line::String, numberofports::Int, io::IO)</code></pre><p>Append the contents of the [reference] section of a Touchstone file from the IOBuffer or IOStream <code>io</code> to the vector <code>reference</code>. The reference impedance values can be spread across multiple lines.</p><p><strong>Examples</strong></p><pre><code class="language-julia hljs">io = IOBuffer(&quot;[Reference] 50.0 60.0 75.0&quot;)
+numberofports = 3
+comments = String[]
+reference = Float64[]
+line = Touchstone.stripcommentslowercase!(comments,readline(io))
+Touchstone.parsereference!(reference, comments, line, numberofports, io)
+println(reference)
+
+# output
+[50.0, 60.0, 75.0]</code></pre><pre><code class="language-julia hljs">io = IOBuffer(&quot;[Reference] 50.0 
+60.0 75.0&quot;)
+numberofports = 3
+comments = String[]
+reference = Float64[]
+line = Touchstone.stripcommentslowercase!(comments,readline(io))
+Touchstone.parsereference!(reference, comments, line, numberofports, io)
+println(reference)
+
+# output
+[50.0, 60.0, 75.0]</code></pre><pre><code class="language-julia hljs">io = IOBuffer(&quot;[Reference] 50.0 
+60.0 75.0
+[Number of Frequencies] 1&quot;)
+numberofports = 3
+comments = String[]
+reference = Float64[]
+line = Touchstone.stripcommentslowercase!(comments,readline(io))
+Touchstone.parsereference!(reference, comments, line, numberofports, io)
+println(reference)
+
+# output
+[50.0, 60.0, 75.0]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parsetwoportdataorder-Tuple{String}" href="#Touchstone.parsetwoportdataorder-Tuple{String}"><code>Touchstone.parsetwoportdataorder</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parsetwoportdataorder(line::String)</code></pre><p>Return the two-port data order string parsed from the [two-port data order] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parsetwoportdataorder(&quot;[two-port data order] 12_21&quot;)
+&quot;12_21&quot;
+
+julia&gt; Touchstone.parsetwoportdataorder(&quot;[two-port data order] 21_12&quot;)
+&quot;21_12&quot;</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.parseversion-Tuple{String}" href="#Touchstone.parseversion-Tuple{String}"><code>Touchstone.parseversion</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">parseversion(line::String)</code></pre><p>Return the version parsed from the [version] line of a Touchstone file.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; Touchstone.parseversion(&quot;[version] 1.0&quot;)
+1.0</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.stripcommentslowercase!-Tuple{Vector{String}, String}" href="#Touchstone.stripcommentslowercase!-Tuple{Vector{String}, String}"><code>Touchstone.stripcommentslowercase!</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">stripcommentslowercase!(comments::Vector{String},line::String)</code></pre><p>Append the comment portion of a line <code>line</code> of a Touchstone file to the vector <code>comments</code>. Return the line with the comments removed and made lowercase.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; comments=String[];println(Touchstone.stripcommentslowercase!(comments,&quot;! This is a comment&quot;));println(comments)
+
+[&quot; This is a comment&quot;]
+
+julia&gt; comments=String[];println(Touchstone.stripcommentslowercase!(comments,&quot;This is a !comment&quot;));println(comments)
+this is a 
+[&quot;comment&quot;]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_file-Tuple{AbstractVector{Float64}, Array{ComplexF64, 3}}" href="#Touchstone.touchstone_file-Tuple{AbstractVector{Float64}, Array{ComplexF64, 3}}"><code>Touchstone.touchstone_file</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_file(f::Vector{Float64}, N::Array{Complex{Float64}};
+    frequencyunit::String = &quot;GHz&quot;,
+    parameter::String = &quot;S&quot;,
+    format::String = &quot;MA&quot;,
+    R::Float64 = 50.0,
+    version::Float64 = 2.0,
+    twoportdataorder::String = &quot;&quot;,
+    numberofnoisefrequencies::Int = 0,
+    reference::Vector{Float64} = Float64[],
+    information::Vector{String} = String[],
+    matrixformat::String = &quot;Full&quot;,
+    mixedmodeorder::Vector{Tuple{Char, Vector{Int}}} = Tuple{Char, Vector{Int}}[],
+    comments::Vector{String} = String[],
+    noisedata::Vector{Float64} = Float64[])</code></pre><p>Generate a TouchstoneFile struct from the frequency vector <code>f</code> in units of Hz and the complex network data array <code>N</code> where the frequency axis is the last dimension. All other arguments are optional.</p></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_load-Tuple{Any}" href="#Touchstone.touchstone_load-Tuple{Any}"><code>Touchstone.touchstone_load</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_load(filename)</code></pre><p>Read a file in the Touchstone format. Standard compliant.</p><p>References to the <a href="https://ibis.org/connector/touchstone_spec11.pdf">1.1 spec</a> and the <a href="https://ibis.org/touchstone_ver2.0/touchstone_ver2_0.pdf">2.0 spec</a>.</p><p>Outputs un-normalized network parameters with frequency units of Hz. Don&#39;t enforce any particular file extension or try to infer the number of ports from the extension.</p></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_parse-Tuple{IO}" href="#Touchstone.touchstone_parse-Tuple{IO}"><code>Touchstone.touchstone_parse</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_parse(io::IO)</code></pre><p>Parse the Touchstone file described by the IOBuffer or IOStream <code>io</code>.</p><p>References to the <a href="https://ibis.org/connector/touchstone_spec11.pdf">1.1 spec</a> and the <a href="https://ibis.org/touchstone_ver2.0/touchstone_ver2_0.pdf">2.0 spec</a>.</p><p><strong>Examples</strong></p><pre><code class="nohighlight hljs">str=&quot;!Example 1:
+!1-port S-parameter file, single frequency point
+# MHz S MA R 50
+!freq magS11 angS11
+2.000 0.894 -12.136&quot;;
+println(str);
+Touchstone.touchstone_parse(IOBuffer(str))
+
+# output
+!Example 1:
+!1-port S-parameter file, single frequency point
+# MHz S MA R 50
+!freq magS11 angS11
+2.000 0.894 -12.136
+Touchstone.TouchstoneFile([2.0e6], ComplexF64[0.874020294860635 - 0.18794819544685323im;;;], &quot;mhz&quot;, &quot;s&quot;, &quot;ma&quot;, 50.0, 1.0, 1, &quot;12_21&quot;, 1, 0, [50.0], String[], &quot;Full&quot;, Tuple{Char, Vector{Int64}}[], [&quot;Example 1:&quot;, &quot;1-port S-parameter file, single frequency point&quot;, &quot;freq magS11 angS11&quot;], [2.0, 0.894, -12.136], Float64[])</code></pre><pre><code class="nohighlight hljs">str=&quot;!Example 4 (Version 2.0):
+! 4-port S-parameter data
+! Default impedance is overridden by [Reference]
+! Data cannot be represented using 1.0 syntax
+! Note that the [Reference] keyword arguments appear on a separate line
+[Version] 2.0
+# GHz S MA R 50
+[Number of Ports] 4
+[Reference]
+50 75 0.01 0.01
+[Number of Frequencies] 1
+[Network Data]
+5.00000 0.60 161.24 0.40 -42.20 0.42 -66.58 0.53 -79.34 !row 1
+0.40 -42.20 0.60 161.20 0.53 -79.34 0.42 -66.58 !row 2
+0.42 -66.58 0.53 -79.34 0.60 161.24 0.40 -42.20 !row 3
+0.53 -79.34 0.42 -66.58 0.40 -42.20 0.60 161.24 !row 4&quot;;
+println(str);
+Touchstone.touchstone_parse(IOBuffer(str))
+
+# output
+!Example 4 (Version 2.0):
+! 4-port S-parameter data
+! Default impedance is overridden by [Reference]
+! Data cannot be represented using 1.0 syntax
+! Note that the [Reference] keyword arguments appear on a separate line
+[Version] 2.0
+# GHz S MA R 50
+[Number of Ports] 4
+[Reference]
+50 75 0.01 0.01
+[Number of Frequencies] 1
+[Network Data]
+5.00000 0.60 161.24 0.40 -42.20 0.42 -66.58 0.53 -79.34 !row 1
+0.40 -42.20 0.60 161.20 0.53 -79.34 0.42 -66.58 !row 2
+0.42 -66.58 0.53 -79.34 0.60 161.24 0.40 -42.20 !row 3
+0.53 -79.34 0.42 -66.58 0.40 -42.20 0.60 161.24 !row 4
+Touchstone.TouchstoneFile([5.0e9], ComplexF64[-0.5681244079815996 + 0.1929628385351877im 0.29632183851470006 - 0.2686882357291961im 0.16693665375723588 - 0.38539869438327984im 0.09803970583787712 - 0.5208533537179372im; 0.29632183851470006 - 0.2686882357291961im -0.5679895560694177 + 0.1933594171383067im 0.09803970583787712 - 0.5208533537179372im 0.16693665375723588 - 0.38539869438327984im; 0.16693665375723588 - 0.38539869438327984im 0.09803970583787712 - 0.5208533537179372im -0.5681244079815996 + 0.1929628385351877im 0.29632183851470006 - 0.2686882357291961im; 0.09803970583787712 - 0.5208533537179372im 0.16693665375723588 - 0.38539869438327984im 0.29632183851470006 - 0.2686882357291961im -0.5681244079815996 + 0.1929628385351877im;;;], &quot;ghz&quot;, &quot;s&quot;, &quot;ma&quot;, 50.0, 2.0, 4, &quot;12_21&quot;, 1, 0, [50.0, 75.0, 0.01, 0.01], String[], &quot;Full&quot;, Tuple{Char, Vector{Int64}}[], [&quot;Example 4 (Version 2.0):&quot;, &quot; 4-port S-parameter data&quot;, &quot; Default impedance is overridden by [Reference]&quot;, &quot; Data cannot be represented using 1.0 syntax&quot;, &quot; Note that the [Reference] keyword arguments appear on a separate line&quot;, &quot;row 1&quot;, &quot;row 2&quot;, &quot;row 3&quot;, &quot;row 4&quot;], [5.0, 0.6, 161.24, 0.4, -42.2, 0.42, -66.58, 0.53, -79.34, 0.4  …  0.4, -42.2, 0.53, -79.34, 0.42, -66.58, 0.4, -42.2, 0.6, 161.24], Float64[])</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_save-Tuple{String, AbstractVector, AbstractArray}" href="#Touchstone.touchstone_save-Tuple{String, AbstractVector, AbstractArray}"><code>Touchstone.touchstone_save</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_save(filename::String,frequencies::AbstractArray,
+    N::AbstractArray;version=1.0,reference=[50.0,50.0],R = 50.0,format=&quot;RI&quot;,
+    comments=[&quot;&quot;],twoportdataorder=&quot;12_21&quot;,matrixformat=&quot;Full&quot;,frequencyunit=&quot;Hz&quot;)</code></pre><p>Write a file in the Touchstone format. Standards compliant except does not support writing noise data.</p><p>References to the <a href="https://ibis.org/connector/touchstone_spec11.pdf">1.1 spec</a> and the <a href="https://ibis.org/touchstone_ver2.0/touchstone_ver2_0.pdf">2.0 spec</a>.</p></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_write-Tuple{IO, AbstractVector{Float64}, Array{ComplexF64, 3}}" href="#Touchstone.touchstone_write-Tuple{IO, AbstractVector{Float64}, Array{ComplexF64, 3}}"><code>Touchstone.touchstone_write</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_write(io::IO, frequencies::AbstractVector, N::AbstractArray;
+    version=1.0, reference=[50.0,50.0], R = 50.0, format=&quot;RI&quot;,
+    parameter = &quot;S&quot;, comments=[&quot;&quot;], twoportdataorder=&quot;12_21&quot;,
+    matrixformat=&quot;Full&quot;, frequencyunit=&quot;Hz&quot;)</code></pre><p>Write a Touchstone file to the IOStream or IOBuffer <code>io</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; io = IOBuffer();Touchstone.touchstone_write(io, [1.0e9, 2.0e9, 10.0e9], [0.3926 - 0.1211im -0.0003 - 0.0021im; -0.0003 - 0.0021im 0.3926 - 0.1211im;;; 0.3517 - 0.3054im -0.0096 - 0.0298im; -0.0096 - 0.0298im 0.3517 - 0.3054im;;; 0.3419 + 0.3336im -0.0134 + 0.0379im; -0.0134 + 0.0379im 0.3419 + 0.3336im];version=1.0,R=50.0,format=&quot;RI&quot;,frequencyunit=&quot;Hz&quot;,comments=[&quot;Example 4:&quot;,&quot;2-port S-parameter file, three frequency points&quot;]);println(String(take!(io)))
+!Example 4:
+!2-port S-parameter file, three frequency points
+# Hz S RI R 50.0
+! freq ReS11 ImS11 ReS21 ImS21 ReS12 ImS12 ReS22 ImS22 
+1.0e9 0.3926 -0.1211 -0.0003 -0.0021 -0.0003 -0.0021 0.3926 -0.1211
+2.0e9 0.3517 -0.3054 -0.0096 -0.0298 -0.0096 -0.0298 0.3517 -0.3054
+1.0e10 0.3419 0.3336 -0.0134 0.0379 -0.0134 0.0379 0.3419 0.3336
+
+julia&gt; io = IOBuffer();Touchstone.touchstone_write(io, [1.0e9, 2.0e9, 10.0e9], [0.3926 - 0.1211im -0.0003 - 0.0021im; -0.0003 - 0.0021im 0.3926 - 0.1211im;;; 0.3517 - 0.3054im -0.0096 - 0.0298im; -0.0096 - 0.0298im 0.3517 - 0.3054im;;; 0.3419 + 0.3336im -0.0134 + 0.0379im; -0.0134 + 0.0379im 0.3419 + 0.3336im];version=2.0,R=50.0,format=&quot;RI&quot;,frequencyunit=&quot;Hz&quot;,comments=[&quot;Example 4:&quot;,&quot;2-port S-parameter file, three frequency points&quot;]);println(String(take!(io)))
+!Example 4:
+!2-port S-parameter file, three frequency points
+[Version] 2.0
+# Hz S RI R 50.0
+[Number of Ports] 2
+[Two-Port Data Order] 12_21
+[Number of Frequencies] 3
+[Reference] 50.0 50.0
+[Network Data]
+! freq ReS11 ImS11 ReS12 ImS12 ReS21 ImS21 ReS22 ImS22 
+1.0e9 0.3926 -0.1211 -0.0003 -0.0021 -0.0003 -0.0021 0.3926 -0.1211
+2.0e9 0.3517 -0.3054 -0.0096 -0.0298 -0.0096 -0.0298 0.3517 -0.3054
+1.0e10 0.3419 0.3336 -0.0134 0.0379 -0.0134 0.0379 0.3419 0.3336
+[End]</code></pre></div></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Touchstone.touchstone_write-Tuple{IO, Touchstone.TouchstoneFile}" href="#Touchstone.touchstone_write-Tuple{IO, Touchstone.TouchstoneFile}"><code>Touchstone.touchstone_write</code></a> — <span class="docstring-category">Method</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">touchstone_write(io::IO, ts::TouchstoneFile)</code></pre><p>Write a Touchstone file specified by the TouchstoneFile object <code>ts</code> to the IOStream or IOBuffer <code>io</code>.</p></div></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« -</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.12.0 on <span class="colophon-date" title="Saturday 7 June 2025 16:54">Saturday 7 June 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
