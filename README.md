@@ -19,7 +19,7 @@ using Pkg
 Pkg.add(name="Touchstone",rev="main")
 ```
 
-If you get errors when running the examples, please try installing the latest version of Julia and updating to the latest version of Touchstone®.jl by running:
+If you get errors when running the examples, please try installing the latest version of Julia and updating to the latest version of Touchstone.jl by running:
 ```
 Pkg.update()
 ```
