@@ -5,6 +5,30 @@
 
 Save and load network parameters in the Touchstone® file format. Touchstone® is a registered trademark of Agilent Technologies, Inc.
 
+# Installation:
+
+To install the latest release of the package, install Julia using [Juliaup](https://github.com/JuliaLang/juliaup), start Julia, and enter the following command:
+```
+using Pkg
+Pkg.add("Touchstone")
+```
+
+To install the development version, start Julia and enter the command:
+```
+using Pkg
+Pkg.add(name="Touchstone",rev="main")
+```
+
+If you get errors when running the examples, please try installing the latest version of Julia and updating to the latest version of Touchstone®.jl by running:
+```
+Pkg.update()
+```
+
+Then check that you are running the latest version of the package with:
+```
+Pkg.status()
+```
+
 # Examples:
 ## Load and save a Touchstone file
 Version 1
