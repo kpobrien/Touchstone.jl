@@ -1,7 +1,7 @@
 name = "Touchstone"
 uuid = "af4736ee-1570-4274-b14c-898d17d80b75"
 authors = ["Kevin P. O'Brien <kpobrien@mit.edu>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 
