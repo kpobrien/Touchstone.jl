@@ -141,7 +141,7 @@ function touchstone_parse(io::IO)
     normalization = 1.0
 
     if eof(io)
-        error("Input is empty and thus not a valid touchstone file.")
+        error(lazy"Input is empty and thus not a valid touchstone file.")
     end
 
     #loop over the contents of the header
@@ -158,7 +158,7 @@ function touchstone_parse(io::IO)
         elseif isversion(line)
             # parse the [Version] line
             if !iszero(version)
-                error("Only one [Version] keyword allowed: $(line)")
+                error(lazy"Only one [Version] keyword allowed: $(line)")
             else
                 version=parseversion(line)
             end
@@ -180,12 +180,12 @@ function touchstone_parse(io::IO)
         elseif isoptionline(line) && !readoptionline
             # the spec says a second options line should be ignored, but the 
             # golden parser tsck2 throws an error. 
-            error("Invalid secondary options line: $(line)")
+            error(lazy"Invalid secondary options line: $(line)")
         
         elseif isnumberofports(line)
             # parse the [Number of Ports] line
             if !iszero(numberofports)
-                error("Only one [Number of Ports] keyword allowed: $(line)")
+                error(lazy"Only one [Number of Ports] keyword allowed: $(line)")
             else
                 numberofports = parsenumberofports(line)
             end
@@ -194,22 +194,22 @@ function touchstone_parse(io::IO)
             # parse the [Two-Port Data Order] line. required if number of ports is 2
             if numberofports == 2
                 if !isempty(twoportdataorder)
-                    error("Only one [Two-Port Data Order] line allowed: $(line)")
+                    error(lazy"Only one [Two-Port Data Order] line allowed: $(line)")
                 else
                     twoportdataorder = parsetwoportdataorder(line)
                 end
             else
-                error("[Two-Port Data Order] is only allowed if [Number of Ports] is 2: $(line)")
+                error(lazy"[Two-Port Data Order] is only allowed if [Number of Ports] is 2: $(line)")
             end
 
         elseif isbegininformation(line)
             if iszero(numberofports)
-                error("[Number of Ports] must be before [Begin Information]")
+                error(lazy"[Number of Ports] must be before [Begin Information]")
             end
             parseinformation!(information, comments, io)
 
         elseif isendinformation(line)
-            error("The [End Information] line should have been parsed by the parseinformation() function.")
+            error(lazy"The [End Information] line should have been parsed by the parseinformation() function.")
         
         elseif isnumberoffrequencies(line)
             numberoffrequencies = parsenumberoffrequencies(line)
@@ -219,10 +219,10 @@ function touchstone_parse(io::IO)
         
         elseif isreference(line)
             if !isempty(reference)
-                error("Only one [Reference] keyword allowed: $(line)")
+                error(lazy"Only one [Reference] keyword allowed: $(line)")
             end
             if iszero(numberofports)
-                error("[Number of Ports] must be before [Reference]")
+                error(lazy"[Number of Ports] must be before [Reference]")
             end
             parsereference!(reference, comments, line, numberofports, io)
         
@@ -233,7 +233,7 @@ function touchstone_parse(io::IO)
         elseif line == "[network data]"
             break
         else
-            error("Unknown line type: $(line)")
+            error(lazy"Unknown line type: $(line)")
         end
     end
 
@@ -242,7 +242,7 @@ function touchstone_parse(io::IO)
     nfreq,nvals =  parsenetworkdata!(networkdata, comments, io)
 
     if nvals == 0
-        error("No network data.")
+        error(lazy"No network data.")
     end
 
     # check if the number of ports and frequencies inferred from reading the
@@ -259,11 +259,11 @@ function touchstone_parse(io::IO)
         # inferred from reading the network data. 
         if matrixformat == "Full"
             if numberofports != convert(Int,sqrt((nvals -1)/2))
-                error("Number of ports not consistent between header and network data.")
+                error(lazy"Number of ports not consistent between header and network data.")
             end
         else
             if numberofports != convert(Int,(sqrt(4*nvals-3)-1)/2)
-                error("Number of ports not consistent between header and network data.")
+                error(lazy"Number of ports not consistent between header and network data.")
             end
         end
     end
@@ -315,7 +315,7 @@ function touchstone_parse(io::IO)
         end
     else
         if numberofports == 2 && isempty(twoportdataorder)
-            error("two-port data order must be defined for a v2 file with two ports.")
+            error(lazy"two-port data order must be defined for a v2 file with two ports.")
         elseif isempty(twoportdataorder)
             twoportdataorder = "12_21"
         end
@@ -361,7 +361,7 @@ function touchstone_save(filename::String, frequencies::AbstractVector,
     if size(N)[1] == size(N)[2]
         numberofports = size(N)[1]
     else
-        error("Network data arrays are not square.")
+        error(lazy"Network data arrays are not square.")
     end
 
     # check the filename. it the file doesn't have a .ts or .sNp extension,
@@ -480,14 +480,14 @@ function touchstone_write(io::IO, ts::TouchstoneFile)
             elseif fmt == "db"
                 write(io,"logmag$(ts.parameter)$(indices[j][1])$(indices[j][2]) ang$(ts.parameter)$(indices[j][1])$(indices[j][2]) ")
             else
-                error("Unknown format")
+                error(lazy"Unknown format")
             end
         end
         write(io,"\n")
 
 
         if !isempty(ts.mixedmodeorder)
-            error("Version 1.0 or 1.1 files do not support mixed-mode order (common and differential modes. Save as a Version 2.0 file or delete mixed-mode order data.")
+            error(lazy"Version 1.0 or 1.1 files do not support mixed-mode order (common and differential modes. Save as a Version 2.0 file or delete mixed-mode order data.")
         end
 
         # normalize Z, Y, G, or H by the reference impedance per the spec.
@@ -497,7 +497,7 @@ function touchstone_write(io::IO, ts::TouchstoneFile)
         elseif p == "s"
             normalization = 1
         else
-            error("Unknown parameter")
+            error(lazy"Unknown parameter")
         end
 
         # write the network data
@@ -595,7 +595,7 @@ function touchstone_write(io::IO, ts::TouchstoneFile)
         # write the mixed-mode order information
         if !isempty(ts.mixedmodeorder)
             if length(ts.mixedmodeorder) != ts.numberofports
-                error("Number of mixed mode order descriptors must match the number of ports.")
+                error(lazy"Number of mixed mode order descriptors must match the number of ports.")
             end
         end
 
@@ -614,7 +614,7 @@ function touchstone_write(io::IO, ts::TouchstoneFile)
             elseif fmt == "db"
                 write(io,"logmag$(ts.parameter)$(indices[j][1])$(indices[j][2]) ang$(ts.parameter)$(indices[j][1])$(indices[j][2]) ")
             else
-                error("Unknown format")
+                error(lazy"Unknown format")
             end
         end
         write(io,"\n")
@@ -710,38 +710,38 @@ numberoffrequencies = length(f)
 # determine the number of ports and number of frequencies from the network 
 # data `N`. check for consistency.
 if numberoffrequencies != size(N,3)
-    error("The size of the last axis of network data N must equal the number of frequecies")
+    error(lazy"The size of the last axis of network data N must equal the number of frequecies")
 end
 
 if size(N,1) != size(N,2)
-    error("Network data matrix must be square")
+    error(lazy"Network data matrix must be square")
 end
 numberofports = size(N,1)
 
 # check the version
 # should be 1.0, 1.1, or 2.0.
 if !(version == 1.0 || version == 1.1 || version == 2.0)
-    error("Version must be 1.0, 1.1, or 2.0")
+    error(lazy"Version must be 1.0, 1.1, or 2.0")
 end
 
 # check the frequencyunit
 # should be Hz, kHz, MHz, or GHz, not case sensitive.
 fu = lowercase(frequencyunit)
 if !(fu == "hz" || fu == "khz" || fu == "mhz" || fu == "ghz")
-    error("Unknown frequency unit")
+    error(lazy"Unknown frequency unit")
 end
 
 # check the format
 # should be MA, RI, or DB, not case sensitive.
 fmt = lowercase(format)
 if !(fmt == "ma" || fmt == "ri" || fmt == "db")
-    error("Unknown format")
+    error(lazy"Unknown format")
 end
 
 # check the parameter
 p = lowercase(parameter)
 if !(p == "s" || p == "y" || p == "z" || p == "h" || p == "g")
-    error("Unknown parameter")
+    error(lazy"Unknown parameter")
 end
 
 # check the impedance `R` and per port impedance `reference`.
@@ -753,12 +753,12 @@ if isempty(reference)
 end
 
 if length(reference) != numberofports
-    error("Number of per port impedances must equal number of ports")
+    error(lazy"Number of per port impedances must equal number of ports")
 end
 
 if version < 2.0
     if numberofports > 1 && allunique(reference)
-        error("The port impedances are not equal, so we cannot generate a Touchstone file with version < 2.0.")
+        error(lazy"The port impedances are not equal, so we cannot generate a Touchstone file with version < 2.0.")
     end
 end
 
@@ -769,11 +769,11 @@ end
 
 if version < 2.0
     if lowercase(matrixformat) != "full"
-        error("For Touchstone files with version less than 2.0 only the Full matrix format is required.") 
+        error(lazy"For Touchstone files with version less than 2.0 only the Full matrix format is required.") 
     end
 else
     if !(lowercase(matrixformat) == "full" || lowercase(matrixformat) == "lower" || lowercase(matrixformat) == "upper")
-        error("For Touchstone files with version 2.0 the valid formats are Full, Lower, or Upper.") 
+        error(lazy"For Touchstone files with version 2.0 the valid formats are Full, Lower, or Upper.") 
     end
 end
 
@@ -789,11 +789,11 @@ if version < 2
 else
     if isempty(twoportdataorder)
         twoportdataorder = "12_21"
-        # error("two-port data order must be defined for a v2 file with two ports.")
+        # error(lazy"two-port data order must be defined for a v2 file with two ports.")
     elseif twoportdataorder == "12_21" || twoportdataorder == "21_12"
         nothing
     else
-        error("Unknown two-port data order.")
+        error(lazy"Unknown two-port data order.")
     end
 end
 
@@ -804,7 +804,7 @@ numberofnoisefrequencies = 0
 if rem(length(noisedata),5) == 0
     numberofnoisefrequencies = length(noisedata) ÷ 5
 else
-    error("Invalid number of elements in noise data.")
+    error(lazy"Invalid number of elements in noise data.")
 end
 
 # generate the networkdata
@@ -944,7 +944,7 @@ function arraytonetworkdata(frequencies,N, numberofports, numberoffrequencies,
         # nvals = ((2*numberofports+1)^2+3)÷4
         nvals = numberofports^2+numberofports+1
     else
-        error("Unknown matrixformat.")
+        error(lazy"Unknown matrixformat.")
     end
 
     indices = matrixindices(numberofports,matrixformat,twoportdataorder)
@@ -958,7 +958,7 @@ function arraytonetworkdata(frequencies,N, numberofports, numberoffrequencies,
     elseif (p == "z" || p == "y" || p == "g" || p  == "h") && version == 2.0
         normalization = 1.0
     else
-        error("Unknown format or version")
+        error(lazy"Unknown format or version")
     end
 
     networkdata = Vector{Float64}(undef,nvals*numberoffrequencies)
@@ -1030,7 +1030,7 @@ function networkdatatoarray(networkdata, numberofports, numberoffrequencies,
     elseif (p == "z" || p == "y" || p == "g" || p == "h") && version == 2.0
         normalization = 1.0
     else
-        error("Error: Unknown parameter.")
+        error(lazy"Error: Unknown parameter.")
     end
 
     # copy over the frequency data
@@ -1140,7 +1140,7 @@ function matrixindices(nports, format, twoportdataorder; printflag = false)
         ntotal = nports^2
         ncol = nports
     else
-        error("Unknown matrix format.")
+        error(lazy"Unknown matrix format.")
     end
 
     i = 1
@@ -1196,11 +1196,11 @@ function matrixindices(nports, format, twoportdataorder; printflag = false)
             end
         end
     elseif twoportdataorder == "21_12"
-        error("Two port data order = 21_12 is only allowed if the number of ports is two.")
+        error(lazy"Two port data order = 21_12 is only allowed if the number of ports is two.")
     elseif twoportdataorder == "12_21"
         nothing
     else
-        error("Unknown two port data order string.")
+        error(lazy"Unknown two port data order string.")
     end
     return indices
 end
@@ -1297,7 +1297,7 @@ function frequencyscale(frequencyunit::String)
     elseif fu == "ghz"
         return 1.0e9
     else
-        error("Unknown frequency unit $frequencyunit")
+        error(lazy"Unknown frequency unit $frequencyunit")
     end
 end
 
@@ -1409,7 +1409,7 @@ julia> Touchstone.parsetwoportdataorder("[two-port data order] 21_12")
 function parsetwoportdataorder(line::String)
     twoportdataorder = strip(line[22:end])
     if !(twoportdataorder == "12_21" || twoportdataorder == "21_12")
-        error("Unknown [Two-Port Data Order] parameter: $(line)")
+        error(lazy"Unknown [Two-Port Data Order] parameter: $(line)")
     end
     return String(twoportdataorder)
 end
@@ -1526,7 +1526,7 @@ julia> Touchstone.parsenumberoffrequencies("[number of frequencies] 10")
 function parsenumberoffrequencies(line::String)
     numberoffrequencies = parse(Int,line[24:end])
     if numberoffrequencies < 1
-        error("Number of frequencies must be an integer greater than zero: $(line)")
+        error(lazy"Number of frequencies must be an integer greater than zero: $(line)")
     end
     return numberoffrequencies
 end
@@ -1566,7 +1566,7 @@ julia> Touchstone.parsenumberofnoisefrequencies("[number of noise frequencies] 1
 function parsenumberofnoisefrequencies(line::String)
     numberofnoisefrequencies = parse(Int,line[30:end])
     if numberofnoisefrequencies < 1
-        error("Number of noise frequencies must be an integer greater than zero: $(line)")
+        error(lazy"Number of noise frequencies must be an integer greater than zero: $(line)")
     end
     return numberofnoisefrequencies
 end
@@ -1658,7 +1658,7 @@ function parsereference!(reference::Vector{Float64}, comments::Vector{String},
                 if length(reference) == numberofports
                     break
                 elseif length(reference) > numberofports
-                    error("Too many values on [Reference] line: $(line)")
+                    error(lazy"Too many values on [Reference] line: $(line)")
                 end
             end
         end
@@ -1711,7 +1711,7 @@ function parsematrixformat(line::String)
     elseif matrixformat == "upper"
         return "Upper"
     else
-        error("Unknown format: $(matrixformat)")
+        error(lazy"Unknown format: $(matrixformat)")
     end
 end
 
@@ -1922,7 +1922,7 @@ function parsenetworkdata!(networkdata::Vector{Float64},
             # after the first option line.
             # this is allowed by the spec but not in the golden parser, so
             # let's also throw an error here. 
-            error("Second option line in network data.")
+            error(lazy"Second option line in network data.")
         elseif isend(line)
             break
         elseif isnoisedata(line)
@@ -1961,7 +1961,7 @@ function parsenetworkdata!(networkdata::Vector{Float64},
                         if nvalsold == 0
                             nvalsold = nvals
                         elseif nvalsold != nvals
-                            error("Number of ports are not consistent between lines:$(line)")
+                            error(lazy"Number of ports are not consistent between lines:$(line)")
                         end
                     end
 
@@ -2062,17 +2062,17 @@ function parsenoisedata!(noisedata, comments, io)
             # after the first option line. 
             # this is allowed by the spec but not in the golden parser, so
             # let's also throw an error here. 
-            error("Second option line in noise data.")
+            error(lazy"Second option line in noise data.")
         elseif isend(line)
             break
         elseif isnoisedata(line)
-            error("Only one [Noise Data] keyword allowed.")
+            error(lazy"Only one [Noise Data] keyword allowed.")
         else
             # parse the noise data lines
             vals = parse.(Float64,split(strip(line),r"\s+"))
 
             if length(vals) != 5
-                error("Noise data lines must have 5 entries.")
+                error(lazy"Noise data lines must have 5 entries.")
             end
 
             # add the values to the noise data array
@@ -2085,7 +2085,7 @@ function parsenoisedata!(noisedata, comments, io)
                 # if the new frequency is less than the old frequency, then 
                 # we have moved on to noise data. add that value, break the loop
                 # and move to the noise data reading loop. 
-                error("Frequencies descending in noise data")
+                error(lazy"Frequencies descending in noise data")
             else
                 freq = vals[1]
                 nnoisefreq+=1
