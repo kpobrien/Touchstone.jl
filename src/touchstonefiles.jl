@@ -151,7 +151,7 @@ function touchstone_parse(io::IO)
         line = stripcommentslowercase!(comments,readline(io))
 
         # parse the line
-        if isempty(line)
+        if isempty(strip(line))
             # don't bother parsing if the string is empty
             nothing
         
@@ -1484,7 +1484,7 @@ function parseinformation!(information::Vector{String},
         end
 
         # store the contents of the line in the information array
-        if !isempty(line)
+        if !isempty(strip(line))
             push!(information,line)
         end
     end
@@ -1653,7 +1653,7 @@ function parsereference!(reference::Vector{Float64}, comments::Vector{String},
         while !eof(io)
             line = stripcommentslowercase!(comments,readline(io))
 
-            if !isempty(line)
+            if !isempty(strip(line))
                 append!(reference,parse.(Float64,split(strip(line),r"\s+")))
                 if length(reference) == numberofports
                     break
@@ -1914,7 +1914,7 @@ function parsenetworkdata!(networkdata::Vector{Float64},
         # read a line
         line = stripcommentslowercase!(comments,readline(io))
 
-        if isempty(line)
+        if isempty(strip(line))
             #skip any lines that don't have anything
             nothing
         elseif isoptionline(line)
@@ -2054,7 +2054,7 @@ function parsenoisedata!(noisedata, comments, io)
         
         line = stripcommentslowercase!(comments,readline(io))
 
-        if isempty(line)
+        if isempty(strip(line))
             #skip any lines that don't have anything
             nothing
         elseif isoptionline(line)
