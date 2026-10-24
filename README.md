@@ -46,10 +46,10 @@ end
 
 julia> example1 = touchstone_load("example1.s1p");
 
-julia> example1.f, example1.version
-([2.0e6], 1.0)
+julia> example1.f, example1.N, example1.version
+([2.0e6], ComplexF64[0.874020294860635 - 0.18794819544685323im;;;], 1.0)
 
-julia> touchstone_save("example1_saved.s1p", example1)
+julia> touchstone_save("example1_saved.s1p", example1.f, example1.N, version=1.0)
 ```
 
 Version 2
@@ -73,10 +73,10 @@ end
 
 julia> example2 = touchstone_load("example2.ts");
 
-julia> example2.f, example2.version
-([2.0e6], 2.0)
+julia> example2.f, example2.N, example2.version
+([2.0e6], ComplexF64[0.874020294860635 - 0.18794819544685323im;;;], 2.0)
 
-julia> touchstone_save("example2_saved.ts", example2)
+julia> touchstone_save("example2_saved.ts", example2.f, example2.N, version=2.0)
 ```
 
 # Writing and validation
