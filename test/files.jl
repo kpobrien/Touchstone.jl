@@ -387,7 +387,10 @@
             path = joinpath(dir, "existing.s1p")
             write(path, "existing")
             for (f, N, kw) in (([big"1e-500"], ones(ComplexF64,1,1,1), (;)),
-                              ([1.0], ones(ComplexF64,1,1,1), (;comments=["valid", bad])))
+                              ([1.0], ones(ComplexF64,1,1,1), (;comments=["valid", bad])),
+                              (Float64[], zeros(ComplexF64,1,1,0), (;)),
+                              ([1.0], ones(ComplexF64,2,2,1), (;version=1.0,information=["source"])),
+                              ([1.0], ones(ComplexF64,2,2,1), (;version=1.1,information=["source"])))
                 @test_throws ErrorException Touchstone.touchstone_save(path, f, N; kw...)
                 @test read(path, String) == "existing"
                 @test readdir(dir) == ["existing.s1p"]

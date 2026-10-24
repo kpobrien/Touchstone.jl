@@ -38,6 +38,15 @@
         end
     end
 
+    @testset "Port count precedes metadata" begin
+        for version in (2.0,2.1), keyword in ("Two-Port Data Order",
+                "Number of Frequencies", "Number of Noise Frequencies", "Reference",
+                "Matrix Format", "Mixed-Mode Order", "Begin Information", "Network Data")
+            text = "[Version] $version\n#\n[$keyword]\n"
+            @test_throws ErrorException("[Number of Ports] must precede [$(lowercase(keyword))]") parsefile(text)
+        end
+    end
+
     @testset "Version 1.1 option lines" begin
         record = "1 1 0 2 0 3 0 4 0\n"
         for refs in ("4 9", "50 50")
@@ -624,6 +633,28 @@
         @test_throws ErrorException parsefile(replace(text,"1 .5 .2 0 10"=>"3 .5 .2 0 10"))
     end
 
+    @testset "Empty network sections" begin
+        for version in (2.0,2.1), count in (1,3)
+            text = v2text("! no records";version,nf=count)
+            @test_throws ErrorException("[Number of Frequencies] is $count, the network data has 0.") parsefile(text)
+        end
+        for reference in ("50", "50 75")
+            @test_throws ErrorException("No network data.") parsefile("# Hz S RI R $reference\n")
+        end
+    end
+
+    @testset "Negative noise frequencies" begin
+        network = "2 1 0 2 0 3 0 4 0"
+        noise = "-1 .5 .25 90 2"
+        for version in (1.0,1.1,2.0,2.1)
+            reference = version == 1.1 ? "50 75" : "50"
+            text = version < 2 ? "# GHz S RI R $reference\n$network\n$noise\n" :
+                v2text(network;version,n=2,extra="[Number of Noise Frequencies] 1\n",
+                    ending="[Noise Data]\n$noise\n[End]")
+            @test_throws ErrorException("The noise data frequency -1.0 is not a finite, nonnegative number on the line: $noise") parsefile(text)
+        end
+    end
+
     @testset "Headers and line endings ($version)" for version in (2.0,2.1)
         base = v2text("1 .5 .1"; version)
         for bad in (replace(base,"[End]"=>""), replace(base,"[End]"=>"[End] garbage"),
@@ -712,6 +743,10 @@
     end
 
     @testset "Legacy first and final records" begin
+        for reference in ("50", "50 75")
+            @test_throws ErrorException("A network record must start with a frequency.") parsefile(
+                "# Hz S RI R $reference\n1 0\n")
+        end
         for data in ("1", "1 \n", "1\n2\n")
             @test_throws ErrorException("Incomplete or non-square network data record.") parsefile(
                 "# Hz S RI R 50\n" * data)

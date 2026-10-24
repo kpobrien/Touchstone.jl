@@ -155,9 +155,6 @@ function parsetouchstone(io::TouchstoneReader)
 
         elseif isbegininformation(line)
             rstrip(line) == "[begin information]" || error("[Begin Information] takes no arguments.")
-            if iszero(numberofports)
-                error(lazy"[Number of Ports] must be before [Begin Information]")
-            end
             parseinformation!(information, comments, io)
 
         elseif isendinformation(line)
@@ -172,9 +169,6 @@ function parsetouchstone(io::TouchstoneReader)
         elseif isreference(line)
             if !isempty(reference)
                 error(lazy"Only one [Reference] keyword allowed: $(line)")
-            end
-            if iszero(numberofports)
-                error(lazy"[Number of Ports] must be before [Reference]")
             end
             parsereference!(reference, comments, line, numberofports, io)
 

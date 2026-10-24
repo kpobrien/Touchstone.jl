@@ -132,6 +132,15 @@
 
     end
 
+    @testset "Empty network data" begin
+        f = Float64[]
+        N = zeros(ComplexF64,1,1,0)
+        for version in (1.0,1.1,2.0,2.1)
+            @test_throws ErrorException("No network data.") Touchstone.touchstone_file(f,N;version)
+            untouched(io -> Touchstone.touchstone_write(io,f,N;version))
+        end
+    end
+
     @testset "touchstone_write" begin
 
         fixtures = networkexamples()
@@ -508,6 +517,12 @@
             @test occursin("[Begin Information]\n[Source] Example\n",text)
             @test occursin("[End Information]\n",text)
             @test parsefile(text).information == information
+        end
+        for version in (1.0,1.1)
+            N = ones(ComplexF64,2,2,1)
+            @test_throws ErrorException("Information sections require Touchstone version 2.") Touchstone.touchstone_file(
+                [1.0],N;version,information)
+            untouched(io -> Touchstone.touchstone_write(io,[1.0],N;version,information))
         end
     end
 

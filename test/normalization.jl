@@ -1,5 +1,13 @@
 @testset "Normalization" begin
 
+    @testset "Reference-resistance exponents" begin
+        for (parameter, expected) in (("s", [0 0; 0 0]),
+                ("z", [1 1; 1 1]), ("y", [-1 -1; -1 -1]),
+                ("h", [1 0; 0 -1]), ("g", [-1 0; 0 1]))
+            @test [Touchstone.normalizationpower(parameter,i,j) for i in 1:2,j in 1:2] == expected
+        end
+    end
+
     @testset "Version 2 physical values" begin
         matrix = ComplexF64[1+2im 3-4im; -5+6im 7+8im]
         N = reshape(matrix,2,2,1)

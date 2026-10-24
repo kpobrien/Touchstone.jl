@@ -28,6 +28,18 @@
             end
         end
     end
+    @testset "Line endings in unbuffered section readers" begin
+        lines = ["first", "", "25 °C", "last"]
+        for newline in ("\n", "\r\n", "\r"), terminated in (false,true)
+            text = join(lines,newline) * (terminated ? newline : "")
+            io = IOBuffer(text)
+            @test [Touchstone.readtouchstoneline(io) for _ in lines] == lines
+            @test position(io) == sizeof(text)
+            @test Touchstone.readtouchstoneline(io) == ""
+            @test isopen(io)
+        end
+    end
+
     @testset "Line storage" begin
         lines = ["first", "25 °C", String(UInt8[0xff]), repeat("x",31), "last"]
         for newline in ("\n", "\r\n", "\r"), blocksize in (7,16,64)
