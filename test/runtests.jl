@@ -3,7 +3,11 @@ using Documenter
 using Test
 using Touchstone
 
-# don't run Aqua and Doctests on nightly
+@testset "Method ambiguities" begin
+    @test isempty(Test.detect_ambiguities(Touchstone; recursive=true))
+end
+
+# Skip Aqua and doctests on Julia development builds.
 if !occursin("DEV", string(VERSION))
     @testset verbose=true "Code quality (Aqua.jl)" begin
         using Aqua
@@ -13,7 +17,7 @@ if !occursin("DEV", string(VERSION))
     @testset verbose = true "Doctests (Documenter.jl)" begin
         using Documenter
 
-        DocMeta.setdocmeta!(Touchstone, 
+        DocMeta.setdocmeta!(Touchstone,
             :DocTestSetup,
             :(using Touchstone);
             recursive=true)
@@ -28,8 +32,4 @@ if !occursin("DEV", string(VERSION))
     end
 end
 
-@testset verbose = true "Touchstone" begin
-
-    include("touchstone.jl")
-
-end
+include("core.jl")

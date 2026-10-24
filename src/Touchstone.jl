@@ -1,7 +1,12 @@
 module Touchstone
 
-# This is for reading and writing files in the touchstone format. 
-include("touchstonefiles.jl")
+include("types.jl")
+include("reader.jl")
+include("conversion.jl")
+include("construction.jl")
+include("headers.jl")
+include("parsing.jl")
+include("writing.jl")
 
 export touchstone_save, touchstone_load
 
