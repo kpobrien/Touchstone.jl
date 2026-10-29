@@ -1,6 +1,6 @@
 # Touchstone.jl
 
-[![DOI](https://zenodo.org/badge/997973202.svg)](https://doi.org/10.5281/zenodo.23763553)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23763553.svg)](https://doi.org/10.5281/zenodo.23763553)
 
 [![Code coverage](https://codecov.io/gh/kpobrien/Touchstone.jl/branch/main/graphs/badge.svg)](https://codecov.io/gh/kpobrien/Touchstone.jl)
 [![Build Status](https://github.com/kpobrien/Touchstone.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/kpobrien/Touchstone.jl/actions?query=workflow) [![Dev docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://kpobrien.github.io/Touchstone.jl/dev/reference/)
